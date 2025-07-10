@@ -3,6 +3,7 @@
 namespace Piggy\Api\Http\Traits;
 
 use Piggy\Api\Http\BaseClient;
+use Piggy\Api\Resources\Register\Products\ProductsResource;
 use Piggy\Api\Resources\Register\Loyalty\Tokens\LoyaltyTokensResource;
 use Piggy\Api\Resources\Register\ContactIdentifiersResource;
 use Piggy\Api\Resources\Register\Contacts\ContactsResource;
@@ -99,6 +100,11 @@ trait SetsRegisterResources
      */
     public $promotion;
 
+    /**
+     * @var ProductsResource
+     */
+    public $products;
+
     protected function setResources(BaseClient $client): void
     {
         $this->registers = new RegisterResource($client);
@@ -116,5 +122,6 @@ trait SetsRegisterResources
         $this->subscriptionTypes = new SubscriptionTypesResource($client);
         $this->voucher = new VouchersResource($client);
         $this->promotion = new PromotionsResource($client);
+        $this->products = new ProductsResource($client);
     }
 }

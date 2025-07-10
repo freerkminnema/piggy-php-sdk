@@ -117,7 +117,7 @@ class ProductsResource extends BaseResource
     /**
      * @throws PiggyRequestException
      */
-    public function batch(array $products): Product
+    public function batch(array $products)
     {
         $response = $this->client->put("$this->resourceUri/batch", [
             'products' => $products,

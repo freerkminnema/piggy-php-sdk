@@ -9,6 +9,8 @@ use Piggy\Api\Exceptions\PiggyRequestException;
 use Piggy\Api\Http\Responses\Response;
 use Piggy\Api\Mappers\Products\ProductMapper;
 use Piggy\Api\Mappers\Products\ProductsMapper;
+use Piggy\Api\Models\Categories\Category;
+use Piggy\Api\Models\Contacts\Subscription;
 
 class Product
 {
@@ -33,7 +35,7 @@ class Product
     protected $description;
 
     /**
-     * @var array|null
+     * @var ?Category[]
      */
     protected $categories;
 
@@ -76,6 +78,9 @@ class Product
         return $this->description;
     }
 
+    /**
+     * @return ?Category[]
+     */
     public function getCategories(): ?array
     {
         return $this->categories;
