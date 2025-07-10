@@ -7,6 +7,7 @@ use Piggy\Api\ApiClient;
 use Piggy\Api\Exceptions\MaintenanceModeException;
 use Piggy\Api\Exceptions\PiggyRequestException;
 use Piggy\Api\Models\Contacts\Contact;
+use Piggy\Api\Models\Shops\Shop;
 use Piggy\Api\StaticMappers\Orders\OrdersMapper;
 
 class Order
@@ -25,6 +26,75 @@ class Order
      * @var Contact
      */
     protected $contact;
+
+    /**
+     * @var Shop
+     */
+    protected $shop;
+
+    /**
+     * @var string
+     */
+    protected $currency;
+
+    /**
+     * @var string|null
+     */
+    protected $reference;
+
+    /**
+     * @var string
+     */
+    protected $status;
+
+    /**
+     * @var string
+     */
+    protected $paymentStatus;
+
+    /**
+     * @var string
+     */
+    protected $formattedTotalAmount;
+
+    /**
+     * @var int|null
+     */
+    protected $orderAmount;
+
+    /**
+     * @var int
+     */
+    protected $totalChargesAmount;
+
+    /**
+     * @var int
+     */
+    protected $totalDiscountAmount;
+
+    /**
+     * @var int
+     */
+    protected $totalOrderAmount;
+
+    /**
+     * @var string|null
+     */
+    protected $paidAt;
+
+    // TODO: Add Line items
+    // TODO: Add Applied discounts
+    // TODO: Add Charges
+
+    /**
+     * @var string|null
+     */
+    protected $createdAt;
+
+    /**
+     * @var string
+     */
+    protected $updatedAt;
 
     /**
      * @var string
@@ -67,6 +137,6 @@ class Order
     {
         $response = ApiClient::get(self::resourceUri, $params);
 
-        return OrdersMapper::map($response->getData());z
+        return OrdersMapper::map($response->getData());
     }
 }
