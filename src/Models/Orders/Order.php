@@ -55,7 +55,7 @@ class Order
     /**
      * @var string
      */
-    protected $formattedTotalAmount;
+    protected $formattedTotalOrderAmount;
 
     /**
      * @var int|null
@@ -82,8 +82,8 @@ class Order
      */
     protected $paidAt;
 
-    // TODO: Add Line items
-    // TODO: Add Applied discounts
+    // TODO: Add Line Items
+    // TODO: Add Applied Discounts
     // TODO: Add Charges
 
     /**
@@ -104,11 +104,37 @@ class Order
     public function __construct(
         string $uuid,
         string $externalIdentifier,
-        Contact $contact
+        Contact $contact,
+        Shop $shop,
+        string $currency,
+        ?string $reference,
+        string $status,
+        string $paymentStatus,
+        string $formattedTotalOrderAmount,
+        ?int $orderAmount,
+        int $totalChargesAmount,
+        int $totalDiscountAmount,
+        int $totalOrderAmount,
+        ?string $paidAt,
+        string $createdAt,
+        string $updatedAt
     ) {
         $this->uuid = $uuid;
         $this->externalIdentifier = $externalIdentifier;
         $this->contact = $contact;
+        $this->shop = $shop;
+        $this->currency = $currency;
+        $this->reference = $reference;
+        $this->status = $status;
+        $this->paymentStatus = $paymentStatus;
+        $this->formattedTotalOrderAmount = $formattedTotalOrderAmount;
+        $this->orderAmount = $orderAmount;
+        $this->totalChargesAmount = $totalChargesAmount;
+        $this->totalDiscountAmount = $totalDiscountAmount;
+        $this->totalOrderAmount = $totalOrderAmount;
+        $this->paidAt = $paidAt;
+        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
     }
 
     public function getUuid(): string
@@ -124,6 +150,71 @@ class Order
     public function getContact(): Contact
     {
         return $this->contact;
+    }
+
+    public function getShop(): Shop
+    {
+        return $this->shop;
+    }
+
+    public function getCurrency(): string
+    {
+        return $this->currency;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function getPaymentStatus(): string
+    {
+        return $this->paymentStatus;
+    }
+
+    public function getFormattedTotalOrderAmount(): string
+    {
+        return $this->formattedTotalOrderAmount;
+    }
+
+    public function getOrderAmount(): ?int
+    {
+        return $this->orderAmount;
+    }
+
+    public function getTotalChargesAmount(): int
+    {
+        return $this->totalChargesAmount;
+    }
+
+    public function getTotalDiscountAmount(): int
+    {
+        return $this->totalDiscountAmount;
+    }
+
+    public function getTotalOrderAmount(): int
+    {
+        return $this->totalOrderAmount;
+    }
+
+    public function getPaidAt(): ?string
+    {
+        return $this->paidAt;
+    }
+
+    public function getCreatedAt(): string
+    {
+        return $this->createdAt;
+    }
+
+    public function getUpdatedAt(): string
+    {
+        return $this->updatedAt;
     }
 
     /**
