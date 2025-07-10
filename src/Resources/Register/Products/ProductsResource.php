@@ -13,7 +13,7 @@ class ProductsResource extends BaseResource
     /**
      * @var string
      */
-    protected $resourceUri = '/api/v3/oauth/registers/products';
+    protected $resourceUri = '/api/v3/register/products';
 
     /**
      * @throws PiggyRequestException
