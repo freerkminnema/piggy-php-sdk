@@ -5,6 +5,7 @@ namespace Piggy\Api\Http\Traits;
 use Piggy\Api\Http\BaseClient;
 use Piggy\Api\Resources\OAuth\Automations\AutomationsResource;
 use Piggy\Api\Resources\OAuth\Brandkit\BrandkitResource;
+use Piggy\Api\Resources\OAuth\Categories\CategoriesResource;
 use Piggy\Api\Resources\OAuth\Contacts\ContactAttributesResource;
 use Piggy\Api\Resources\OAuth\Contacts\ContactIdentifiersResource;
 use Piggy\Api\Resources\OAuth\Contacts\ContactsResource;
@@ -209,6 +210,11 @@ trait SetsOAuthResources
      */
     public $products;
 
+    /**
+     * @var CategoriesResource
+     */
+    public $categories;
+
     protected function setResources(BaseClient $client): void
     {
         $this->contacts = new ContactsResource($client);
@@ -245,5 +251,6 @@ trait SetsOAuthResources
         $this->collectableRewards = new CollectableRewardsResource($client);
         $this->customAttributes = new CustomAttributeResource($client);
         $this->products = new ProductsResource($client);
+        $this->categories = new CategoriesResource($client);
     }
 }

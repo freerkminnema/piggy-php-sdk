@@ -250,20 +250,6 @@ class ProductsResourceTest extends OAuthTestCase
     {
         $this->addExpectedResponse(null);
 
-        $this->addExpectedResponse([
-            'uuid' => '123',
-            'external_identifier' => '123',
-            'name' => 'Product 1 name',
-            'description' => 'Product 1 description',
-            'categories' => [
-                [
-                    'uuid' => '123',
-                    'external_identifier' => '123',
-                    'name' => 'Category 1',
-                ]
-            ]
-        ]);
-
         $product = $this->mockedClient->products->delete('123');
 
         $this->assertNull($product);
@@ -280,21 +266,25 @@ class ProductsResourceTest extends OAuthTestCase
         ]);
 
         $response = $this->mockedClient->products->batch([
-            '456',
-            '456',
-            'Product 1 name',
-            'Product 1 description',
             [
-                'external_identifier' => '123',
-                'name' => 'Category 1',
+                '123',
+                '123',
+                'Product 1 name',
+                'Product 1 description',
+                [
+                    'external_identifier' => '123',
+                    'name' => 'Category 1',
+                ],
             ],
-            '456',
-            '456',
-            'Product 2 name',
-            'Product 2 description',
             [
-                'external_identifier' => '456',
-                'name' => 'Category 2',
+                '456',
+                '456',
+                'Product 2 name',
+                'Product 2 description',
+                [
+                    'external_identifier' => '456',
+                    'name' => 'Category 2',
+                ]
             ]
         ]);
 
