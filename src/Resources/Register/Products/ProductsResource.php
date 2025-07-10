@@ -13,12 +13,9 @@ class ProductsResource extends BaseResource
     /**
      * @var string
      */
-    protected $resourceUri = '/api/v3/register/external-products';
+    protected $resourceUri = '/api/v3/oauth/registers/products';
 
     /**
-     * @param  mixed[]  $params
-     * @return Product[]
-     *
      * @throws PiggyRequestException
      */
     public function list(array $params = []): array
@@ -31,17 +28,15 @@ class ProductsResource extends BaseResource
     }
 
     /**
-     * @param mixed[] $options
-     *
      * @throws PiggyRequestException
      */
-    public function create(string $label, string $name, string $dataType, array $options): Product
+    public function create(string $externalIdentifier, string $name, ?string $description, ?array $categories): Product
     {
         $response = $this->client->post($this->resourceUri, [
-            'label' => $label,
+            'external_identifier' => $externalIdentifier,
             'name' => $name,
-            'dataType' => $dataType,
-            'options' => $options,
+            'description' => $description,
+            'categories' => $categories,
         ]);
 
         $mapper = new ProductMapper();
@@ -50,13 +45,11 @@ class ProductsResource extends BaseResource
     }
 
     /**
-     * @param  mixed[]  $params
-     *
      * @throws PiggyRequestException
      */
-    public function get(string $perkUuid, array $params = []): Product
+    public function get(string $uuid, array $params = []): Product
     {
-        $response = $this->client->get("$this->resourceUri/$perkUuid", $params);
+        $response = $this->client->get("$this->resourceUri/$uuid", $params);
 
         $mapper = new ProductMapper();
 
@@ -66,10 +59,10 @@ class ProductsResource extends BaseResource
     /**
      * @throws PiggyRequestException
      */
-    public function update(string $perkUuid, string $label): Product
+    public function find(string $externalIdentifier): Product
     {
-        $response = $this->client->put("$this->resourceUri/$perkUuid", [
-            'label' => $label,
+        $response = $this->client->get("$this->resourceUri/find", [
+            'external_identifier' => $externalIdentifier,
         ]);
 
         $mapper = new ProductMapper();
@@ -78,14 +71,57 @@ class ProductsResource extends BaseResource
     }
 
     /**
-     * @param mixed[] $params
-     * @return null
-     *
      * @throws PiggyRequestException
      */
-    public function delete(string $perkUuid, array $params = [])
+    public function findOrCreate(string $externalIdentifier, ?string $name, ?string $description, ?array $categories): Product
     {
-        $response = $this->client->destroy("$this->resourceUri/$perkUuid", $params);
+        $response = $this->client->post("$this->resourceUri/find-or-create", [
+            'external_identifier' => $externalIdentifier,
+            'name' => $name,
+            'description' => $description,
+            'categories' => $categories,
+        ]);
+
+        $mapper = new ProductMapper();
+
+        return $mapper->map($response->getData());
+    }
+
+    /**
+     * @throws PiggyRequestException
+     */
+    public function update(string $uuid, ?string $externalIdentifier, ?string $name, ?string $description, ?array $categories): Product
+    {
+        $response = $this->client->put("$this->resourceUri/$uuid", [
+            'external_identifier' => $externalIdentifier,
+            'name' => $name,
+            'description' => $description,
+            'categories' => $categories,
+        ]);
+
+        $mapper = new ProductMapper();
+
+        return $mapper->map($response->getData());
+    }
+
+    /**
+     * @throws PiggyRequestException
+     */
+    public function delete(string $uuid, array $params = [])
+    {
+        $response = $this->client->destroy("$this->resourceUri/$uuid", $params);
+
+        return $response->getData();
+    }
+
+    /**
+     * @throws PiggyRequestException
+     */
+    public function batch(array $products): Product
+    {
+        $response = $this->client->put("$this->resourceUri/batch", [
+            'products' => $products,
+        ]);
 
         return $response->getData();
     }

@@ -13,7 +13,8 @@ class ProductMapper
             $data->uuid,
             $data->externalIdentifier,
             $data->name,
-            $data->description
+            $data->description,
+            $data->categories
         );
     }
 }

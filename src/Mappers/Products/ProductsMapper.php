@@ -15,11 +15,11 @@ class ProductsMapper
     {
         $mapper = new ProductMapper();
 
-        $perks = [];
+        $products = [];
         foreach ($data as $item) {
-            $perks[] = $mapper->map($item);
+            $products[] = $mapper->map($item);
         }
 
-        return $perks;
+        return $products;
     }
 }
