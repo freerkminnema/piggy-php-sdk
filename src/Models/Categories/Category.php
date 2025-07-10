@@ -64,7 +64,7 @@ class Category
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function list(array $params = []): array
+    public static function list(array $params = []): array
     {
         $response = ApiClient::get(self::resourceUri, $params);
 
@@ -78,7 +78,7 @@ class Category
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function create(array $body): Category
+    public static function create(array $body): Category
     {
         $response = ApiClient::post(self::resourceUri, $body);
 
@@ -93,7 +93,7 @@ class Category
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function get(string $uuid, array $params = []): Category
+    public static function get(string $uuid, array $params = []): Category
     {
         $response = ApiClient::get(self::resourceUri."/$uuid", $params);
 
@@ -107,7 +107,7 @@ class Category
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function find(array $params): Category
+    public static function find(array $params): Category
     {
         $response = ApiClient::get(self::resourceUri."/find", $params);
 
@@ -121,7 +121,7 @@ class Category
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function findOrCreate(array $body): Category
+    public static function findOrCreate(array $body): Category
     {
         $response = ApiClient::post(self::resourceUri."/find-or-create", $body);
 
@@ -136,7 +136,7 @@ class Category
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function update(string $uuid, array $body): Category
+    public static function update(string $uuid, array $body): Category
     {
         $response = ApiClient::put(self::resourceUri."/$uuid", $body);
 
@@ -151,7 +151,7 @@ class Category
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function delete(string $uuid, array $params = []): Response
+    public static function delete(string $uuid, array $params = []): Response
     {
         return ApiClient::delete(self::resourceUri."/$uuid", $params);
     }
@@ -163,7 +163,7 @@ class Category
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function batch(array $body): array
+    public static function batch(array $body): array
     {
         $response = ApiClient::put(self::resourceUri."/batch", $body);
 
