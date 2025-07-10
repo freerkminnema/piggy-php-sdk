@@ -27,7 +27,8 @@ class Category
      */
     protected $name;
 
-    /*** @var string
+    /**
+     * @var string
      */
     const resourceUri = '/api/v3/oauth/clients/categories';
 
@@ -57,9 +58,11 @@ class Category
     }
 
     /**
-     * @throws GuzzleException
-     * @throws MaintenanceModeException
-     * @throws PiggyRequestException
+     * @param array<string, mixed> $params
+     *
+     * @return Category[]
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
     public function list(array $params = []): array
     {
@@ -69,24 +72,26 @@ class Category
     }
 
     /**
-     * @throws GuzzleException
-     * @throws MaintenanceModeException
-     * @throws PiggyRequestException
+     * @param array<string, mixed> $body
+     *
+     * @return Category
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function create(string $externalIdentifier, string $name): Category
+    public function create(array $body): Category
     {
-        $response = ApiClient::post(self::resourceUri, [
-            'external_identifier' => $externalIdentifier,
-            'name' => $name,
-        ]);
+        $response = ApiClient::post(self::resourceUri, $body);
 
         return CategoryMapper::map($response->getData());
     }
 
     /**
-     * @throws GuzzleException
-     * @throws MaintenanceModeException
-     * @throws PiggyRequestException
+     * @param string $uuid
+     * @param array<string, mixed> $params
+     *
+     * @return Category
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
     public function get(string $uuid, array $params = []): Category
     {
@@ -96,53 +101,55 @@ class Category
     }
 
     /**
-     * @throws GuzzleException
-     * @throws MaintenanceModeException
-     * @throws PiggyRequestException
+     * @param array<string, mixed> $params
+     *
+     * @return Category
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function find(string $externalIdentifier): Category
+    public function find(array $params): Category
     {
-        $response = ApiClient::get(self::resourceUri."/find", [
-            'external_identifier' => $externalIdentifier,
-        ]);
+        $response = ApiClient::get(self::resourceUri."/find", $params);
 
         return CategoryMapper::map($response->getData());
     }
 
     /**
-     * @throws GuzzleException
-     * @throws MaintenanceModeException
-     * @throws PiggyRequestException
+     * @param array<string, mixed> $body
+     *
+     * @return Category
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function findOrCreate(string $externalIdentifier, ?string $name): Category
+    public function findOrCreate(array $body): Category
     {
-        $response = ApiClient::post(self::resourceUri."/find-or-create", [
-            'external_identifier' => $externalIdentifier,
-            'name' => $name,
-        ]);
+        $response = ApiClient::post(self::resourceUri."/find-or-create", $body);
 
         return CategoryMapper::map($response->getData());
     }
 
     /**
-     * @throws GuzzleException
-     * @throws MaintenanceModeException
-     * @throws PiggyRequestException
+     * @param string $uuid
+     * @param array<string, mixed> $body
+     *
+     * @return Category
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function update(string $uuid, ?string $externalIdentifier, ?string $name): Category
+    public function update(string $uuid, array $body): Category
     {
-        $response = ApiClient::put(self::resourceUri."/$uuid", [
-            'external_identifier' => $externalIdentifier,
-            'name' => $name,
-        ]);
+        $response = ApiClient::put(self::resourceUri."/$uuid", $body);
 
         return CategoryMapper::map($response->getData());
     }
 
     /**
-     * @throws GuzzleException
-     * @throws MaintenanceModeException
-     * @throws PiggyRequestException
+     * @param string $uuid
+     * @param array<string, mixed> $params
+     *
+     * @return Response
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
     public function delete(string $uuid, array $params = []): Response
     {
@@ -150,15 +157,15 @@ class Category
     }
 
     /**
-     * @throws GuzzleException
-     * @throws MaintenanceModeException
-     * @throws PiggyRequestException
+     * @param array<string, mixed> $body
+     *
+     * @return array<string, string>
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public function batch(array $categories)
+    public function batch(array $body): array
     {
-        $response = ApiClient::put(self::resourceUri."/batch", [
-            'categories' => $categories,
-        ]);
+        $response = ApiClient::put(self::resourceUri."/batch", $body);
 
         return $response->getData();
     }

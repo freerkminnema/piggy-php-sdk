@@ -16,6 +16,10 @@ class CategoriesResource extends BaseResource
     protected $resourceUri = '/api/v3/register/categories';
 
     /**
+     * @param array<string, mixed> $params
+     *
+     * @return Category[]
+     *
      * @throws PiggyRequestException
      */
     public function list(array $params = []): array
@@ -28,6 +32,11 @@ class CategoriesResource extends BaseResource
     }
 
     /**
+     * @param string $externalIdentifier
+     * @param string $name
+     *
+     * @return Category
+     *
      * @throws PiggyRequestException
      */
     public function create(string $externalIdentifier, string $name): Category
@@ -43,6 +52,11 @@ class CategoriesResource extends BaseResource
     }
 
     /**
+     * @param string $uuid
+     * @param array<string, mixed> $params
+     *
+     * @return Category
+     *
      * @throws PiggyRequestException
      */
     public function get(string $uuid, array $params = []): Category
@@ -55,6 +69,10 @@ class CategoriesResource extends BaseResource
     }
 
     /**
+     * @param string $externalIdentifier
+     *
+     * @return Category
+     *
      * @throws PiggyRequestException
      */
     public function find(string $externalIdentifier): Category
@@ -69,6 +87,11 @@ class CategoriesResource extends BaseResource
     }
 
     /**
+     * @param string $externalIdentifier
+     * @param string|null $name
+     *
+     * @return Category
+     *
      * @throws PiggyRequestException
      */
     public function findOrCreate(string $externalIdentifier, ?string $name): Category
@@ -84,6 +107,12 @@ class CategoriesResource extends BaseResource
     }
 
     /**
+     * @param string $uuid
+     * @param string|null $externalIdentifier
+     * @param string|null $name
+     *
+     * @return Category
+     *
      * @throws PiggyRequestException
      */
     public function update(string $uuid, ?string $externalIdentifier, ?string $name): Category
@@ -99,6 +128,11 @@ class CategoriesResource extends BaseResource
     }
 
     /**
+     * @param string $uuid
+     * @param array<string, mixed> $params
+     *
+     * @return mixed
+     *
      * @throws PiggyRequestException
      */
     public function delete(string $uuid, array $params = [])
@@ -109,6 +143,10 @@ class CategoriesResource extends BaseResource
     }
 
     /**
+     * @param array<string, mixed> $categories
+     *
+     * @return array<string, mixed>
+     *
      * @throws PiggyRequestException
      */
     public function batch(array $categories)

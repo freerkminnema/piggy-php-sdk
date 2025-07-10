@@ -16,6 +16,10 @@ class ProductsResource extends BaseResource
     protected $resourceUri = '/api/v3/oauth/clients/products';
 
     /**
+     * @param array<string, mixed> $params
+     *
+     * @return Product[]
+     *
      * @throws PiggyRequestException
      */
     public function list(array $params = []): array
@@ -28,6 +32,13 @@ class ProductsResource extends BaseResource
     }
 
     /**
+     * @param string $externalIdentifier
+     * @param string $name
+     * @param string|null $description
+     * @param array<int, array<string, mixed>>|null $categories
+     *
+     * @return Product
+     *
      * @throws PiggyRequestException
      */
     public function create(string $externalIdentifier, string $name, ?string $description, ?array $categories): Product
@@ -45,6 +56,11 @@ class ProductsResource extends BaseResource
     }
 
     /**
+     * @param string $uuid
+     * @param array<string, mixed> $params
+     *
+     * @return Product
+     *
      * @throws PiggyRequestException
      */
     public function get(string $uuid, array $params = []): Product
@@ -57,6 +73,10 @@ class ProductsResource extends BaseResource
     }
 
     /**
+     * @param string $externalIdentifier
+     *
+     * @return Product
+     *
      * @throws PiggyRequestException
      */
     public function find(string $externalIdentifier): Product
@@ -71,6 +91,13 @@ class ProductsResource extends BaseResource
     }
 
     /**
+     * @param string $externalIdentifier
+     * @param string|null $name
+     * @param string|null $description
+     * @param array<int, array<string, mixed>>|null $categories
+     *
+     * @return Product
+     *
      * @throws PiggyRequestException
      */
     public function findOrCreate(string $externalIdentifier, ?string $name, ?string $description, ?array $categories): Product
@@ -88,6 +115,14 @@ class ProductsResource extends BaseResource
     }
 
     /**
+     * @param string $uuid
+     * @param string|null $externalIdentifier
+     * @param string|null $name
+     * @param string|null $description
+     * @param array<int, array<string, mixed>>|null $categories
+     *
+     * @return Product
+     *
      * @throws PiggyRequestException
      */
     public function update(string $uuid, ?string $externalIdentifier, ?string $name, ?string $description, ?array $categories): Product
@@ -105,6 +140,11 @@ class ProductsResource extends BaseResource
     }
 
     /**
+     * @param string $uuid
+     * @param array<string, mixed> $params
+     *
+     * @return mixed
+     *
      * @throws PiggyRequestException
      */
     public function delete(string $uuid, array $params = [])
@@ -115,6 +155,10 @@ class ProductsResource extends BaseResource
     }
 
     /**
+     * @param array<string, mixed> $products
+     *
+     * @return array<string, mixed>
+     *
      * @throws PiggyRequestException
      */
     public function batch(array $products)
