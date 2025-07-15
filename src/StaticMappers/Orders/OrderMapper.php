@@ -43,7 +43,9 @@ class OrderMapper
             $data->updated_at,
             $contact,
             $shop,
-            $lineItems
+            $lineItems,
+            $data->applied_discounts,
+            $data->charges
         );
     }
 }

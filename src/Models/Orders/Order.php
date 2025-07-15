@@ -74,9 +74,6 @@ class Order
      */
     protected $paidAt;
 
-    // TODO: Add Applied Discounts
-    // TODO: Add Charges
-
     /**
      * @var string
      */
@@ -103,6 +100,16 @@ class Order
     protected $lineItems;
 
     /**
+     * @var AppliedDiscount[] $appliedDiscounts
+     */
+    protected $appliedDiscounts = [];
+
+    /**
+     * @var Charge[] $charges
+     */
+    protected $charges = [];
+
+    /**
      * @var string
      */
     const resourceUri = '/api/v3/oauth/clients/orders';
@@ -125,7 +132,9 @@ class Order
         string $updatedAt,
         Contact $contact,
         Shop $shop,
-        array $lineItems
+        array $lineItems,
+        array $appliedDiscounts = [],
+        array $charges = []
     ) {
         $this->uuid = $uuid;
         $this->externalIdentifier = $externalIdentifier;
@@ -144,6 +153,8 @@ class Order
         $this->contact = $contact;
         $this->shop = $shop;
         $this->lineItems = $lineItems;
+        $this->appliedDiscounts = $appliedDiscounts;
+        $this->charges = $charges;
     }
 
     public function getUuid(): string
@@ -232,6 +243,22 @@ class Order
     public function getLineItems(): array
     {
         return $this->lineItems;
+    }
+
+    /**
+     * @return array|AppliedDiscount[]
+     */
+    public function getAppliedDiscounts(): array
+    {
+        return $this->appliedDiscounts;
+    }
+
+    /**
+     * @return array|Charge[]
+     */
+    public function charges(): array
+    {
+        return $this->charges;
     }
 
     /**
