@@ -114,7 +114,11 @@ class Order
      */
     const resourceUri = '/api/v3/oauth/clients/orders';
 
-    /** @param LineItem[] $lineItems */
+    /**
+     * @param LineItem[] $lineItems
+     * @param AppliedDiscount[] $appliedDiscounts
+     * @param Charge[] $charges
+     */
     public function __construct(
         string $uuid,
         string $externalIdentifier,

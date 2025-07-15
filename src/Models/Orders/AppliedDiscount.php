@@ -50,8 +50,8 @@ class AppliedDiscount
     protected $subLineItems;
 
     /**
-     * @param LineItem[] $lineItems
-     * @param SubLineItem[] $subLineItems
+     * @param array<string, string> $lineItems
+     * @param array<string, string> $subLineItems
      */
     public function __construct(
         string $uuid,
