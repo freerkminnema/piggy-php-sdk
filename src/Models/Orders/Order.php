@@ -78,7 +78,7 @@ class Order
     // TODO: Add Charges
 
     /**
-     * @var string|null
+     * @var string
      */
     protected $createdAt;
 
@@ -107,6 +107,7 @@ class Order
      */
     const resourceUri = '/api/v3/oauth/clients/orders';
 
+    /** @param LineItem[] $lineItems */
     public function __construct(
         string $uuid,
         string $externalIdentifier,
@@ -225,6 +226,9 @@ class Order
         return $this->shop;
     }
 
+    /**
+     * @return array|LineItem[]
+     */
     public function getLineItems(): array
     {
         return $this->lineItems;
