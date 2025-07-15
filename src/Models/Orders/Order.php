@@ -8,7 +8,9 @@ use Piggy\Api\Exceptions\MaintenanceModeException;
 use Piggy\Api\Exceptions\PiggyRequestException;
 use Piggy\Api\Models\Contacts\Contact;
 use Piggy\Api\Models\Shops\Shop;
+use Piggy\Api\StaticMappers\Orders\OrderMapper;
 use Piggy\Api\StaticMappers\Orders\OrdersMapper;
+use stdClass;
 
 class Order
 {
@@ -21,16 +23,6 @@ class Order
      * @var string
      */
     protected $externalIdentifier;
-
-    /**
-     * @var Contact
-     */
-    protected $contact;
-
-    /**
-     * @var Shop
-     */
-    protected $shop;
 
     /**
      * @var string
@@ -82,7 +74,6 @@ class Order
      */
     protected $paidAt;
 
-    // TODO: Add Line Items
     // TODO: Add Applied Discounts
     // TODO: Add Charges
 
@@ -97,6 +88,21 @@ class Order
     protected $updatedAt;
 
     /**
+     * @var Contact
+     */
+    protected $contact;
+
+    /**
+     * @var Shop
+     */
+    protected $shop;
+
+    /**
+     * @var LineItem[] $lineItems
+     */
+    protected $lineItems;
+
+    /**
      * @var string
      */
     const resourceUri = '/api/v3/oauth/clients/orders';
@@ -104,8 +110,6 @@ class Order
     public function __construct(
         string $uuid,
         string $externalIdentifier,
-        Contact $contact,
-        Shop $shop,
         string $currency,
         ?string $reference,
         string $status,
@@ -117,12 +121,13 @@ class Order
         int $totalOrderAmount,
         ?string $paidAt,
         string $createdAt,
-        string $updatedAt
+        string $updatedAt,
+        Contact $contact,
+        Shop $shop,
+        array $lineItems
     ) {
         $this->uuid = $uuid;
         $this->externalIdentifier = $externalIdentifier;
-        $this->contact = $contact;
-        $this->shop = $shop;
         $this->currency = $currency;
         $this->reference = $reference;
         $this->status = $status;
@@ -135,6 +140,9 @@ class Order
         $this->paidAt = $paidAt;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+        $this->contact = $contact;
+        $this->shop = $shop;
+        $this->lineItems = $lineItems;
     }
 
     public function getUuid(): string
@@ -145,16 +153,6 @@ class Order
     public function getExternalIdentifier(): string
     {
         return $this->externalIdentifier;
-    }
-
-    public function getContact(): Contact
-    {
-        return $this->contact;
-    }
-
-    public function getShop(): Shop
-    {
-        return $this->shop;
     }
 
     public function getCurrency(): string
@@ -217,6 +215,21 @@ class Order
         return $this->updatedAt;
     }
 
+    public function getContact(): Contact
+    {
+        return $this->contact;
+    }
+
+    public function getShop(): Shop
+    {
+        return $this->shop;
+    }
+
+    public function getLineItems(): array
+    {
+        return $this->lineItems;
+    }
+
     /**
      * @param array<string, mixed> $params
      *
@@ -229,5 +242,91 @@ class Order
         $response = ApiClient::get(self::resourceUri, $params);
 
         return OrdersMapper::map($response->getData());
+    }
+
+    /**
+     * @param string $uuid
+     * @param array<string, mixed> $params
+     *
+     * @return Order
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
+     */
+    public static function get(string $uuid, array $params = []): Order
+    {
+        $response = ApiClient::get(self::resourceUri."/$uuid", $params);
+
+        return OrderMapper::map($response->getData());
+    }
+
+    /**
+     * @param array<string, mixed> $params
+     *
+     * @return Order
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
+     */
+    public static function find(array $params): Order
+    {
+        $response = ApiClient::get(self::resourceUri."/find", $params);
+
+        return OrderMapper::map($response->getData());
+    }
+
+    /**
+     * @param array<string, mixed> $body
+     *
+     * @return Order
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
+     */
+    public static function create(array $body): Order
+    {
+        $response = ApiClient::post(self::resourceUri, $body);
+
+        return OrderMapper::map($response->getData());
+    }
+
+    /**
+     * @param string $uuid
+     * @param array<string, mixed> $body
+     *
+     * @return Order
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
+     */
+    public static function process(string $uuid, array $body): Order
+    {
+        $response = ApiClient::post(self::resourceUri."$uuid/process", $body);
+
+        return OrderMapper::map($response->getData());
+    }
+
+    /**
+     * @param array<string, mixed> $body
+     *
+     * @return Order
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
+     */
+    public static function createAndProcess(array $body): Order
+    {
+        $response = ApiClient::post(self::resourceUri."/create-and-process", $body);
+
+        return OrderMapper::map($response->getData());
+    }
+
+    /**
+     * @param array<string, mixed> $body
+     *
+     * @return stdClass
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
+     */
+    public static function calculate(array $body): stdClass
+    {
+        $response = ApiClient::post(self::resourceUri."/calculate", $body);
+
+        return $response->getData();
     }
 }

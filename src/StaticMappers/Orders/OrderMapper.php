@@ -21,6 +21,11 @@ class OrderMapper
             $shop = ShopMapper::map($data->business_profile);
         }
 
+        $lineItems = [];
+        if (isset($data->line_items)) {
+            $lineItems = LineItemsMapper::map($data->line_items);
+        }
+
         return new Order(
             $data->uuid,
             $data->external_identifier,
@@ -37,7 +42,8 @@ class OrderMapper
             (int) $data->total_order_amount,
             $data->paid_at ?? null,
             $data->created_at,
-            $data->updated_at
+            $data->updated_at,
+            $lineItems
         );
     }
 }
