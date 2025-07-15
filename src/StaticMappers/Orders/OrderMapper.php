@@ -29,8 +29,6 @@ class OrderMapper
         return new Order(
             $data->uuid,
             $data->external_identifier,
-            $contact,
-            $shop,
             $data->currency,
             $data->reference ?? null,
             $data->status,
@@ -43,6 +41,8 @@ class OrderMapper
             $data->paid_at ?? null,
             $data->created_at,
             $data->updated_at,
+            $contact,
+            $shop,
             $lineItems
         );
     }

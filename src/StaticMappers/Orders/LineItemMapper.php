@@ -23,8 +23,8 @@ class LineItemMapper
             $data->price,
             $data->discount_amount,
             $data->total_amount,
-            $data->created_at,
-            $data->updated_at,
+            $data->created_at ?? '',
+            $data->updated_at ?? '',
             $product,
             $data->sub_line_items
         );

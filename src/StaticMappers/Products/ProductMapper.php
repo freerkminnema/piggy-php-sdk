@@ -17,11 +17,11 @@ class ProductMapper
         }
 
         return new Product(
-            $data->uuid,
+            $data->uuid ?? '',
             $data->external_identifier,
             $data->name,
-            $data->description,
-            $categories
+            $data->description ?? null,
+            $categories ?? null
         );
     }
 }
