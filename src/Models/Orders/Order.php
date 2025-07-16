@@ -10,7 +10,6 @@ use Piggy\Api\Models\Contacts\Contact;
 use Piggy\Api\Models\Shops\Shop;
 use Piggy\Api\StaticMappers\Orders\OrderMapper;
 use Piggy\Api\StaticMappers\Orders\OrdersMapper;
-use stdClass;
 
 class Order
 {
@@ -95,17 +94,17 @@ class Order
     protected $shop;
 
     /**
-     * @var LineItem[] $lineItems
+     * @var LineItem[]
      */
-    protected $lineItems;
+    protected $lineItems = [];
 
     /**
-     * @var AppliedDiscount[] $appliedDiscounts
+     * @var AppliedDiscount[]
      */
     protected $appliedDiscounts = [];
 
     /**
-     * @var Charge[] $charges
+     * @var Charge[]
      */
     protected $charges = [];
 
@@ -136,7 +135,7 @@ class Order
         string $updatedAt,
         Contact $contact,
         Shop $shop,
-        array $lineItems,
+        array $lineItems = [],
         array $appliedDiscounts = [],
         array $charges = []
     ) {
@@ -242,7 +241,7 @@ class Order
     }
 
     /**
-     * @return array|LineItem[]
+     * @return LineItem[]
      */
     public function getLineItems(): array
     {
@@ -250,7 +249,7 @@ class Order
     }
 
     /**
-     * @return array|AppliedDiscount[]
+     * @return AppliedDiscount[]
      */
     public function getAppliedDiscounts(): array
     {
@@ -258,7 +257,7 @@ class Order
     }
 
     /**
-     * @return array|Charge[]
+     * @return Charge[]
      */
     public function charges(): array
     {
@@ -326,39 +325,42 @@ class Order
      * @param string $uuid
      * @param array<string, mixed> $body
      *
-     * @return Order
+     * @return array<string, mixed>
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public static function process(string $uuid, array $body): Order
+    public static function process(string $uuid, array $body): array
     {
         $response = ApiClient::post(self::resourceUri."$uuid/process", $body);
 
-        return OrderMapper::map($response->getData());
+        return $response->getData();
     }
 
     /**
      * @param array<string, mixed> $body
      *
-     * @return Order
+     * @return array<string, mixed>
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public static function createAndProcess(array $body): Order
+    public static function createAndProcess(array $body): array
     {
         $response = ApiClient::post(self::resourceUri."/create-and-process", $body);
 
-        return OrderMapper::map($response->getData());
+        return [
+            'order' => OrderMapper::map($response->getData()->order),
+            'result' => $response->getData()->result,
+        ];
     }
 
     /**
      * @param array<string, mixed> $body
      *
-     * @return stdClass
+     * @return array<string, mixed>
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public static function calculate(array $body): stdClass
+    public static function calculate(array $body): array
     {
         $response = ApiClient::post(self::resourceUri."/calculate", $body);
 

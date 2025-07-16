@@ -59,7 +59,7 @@ class LineItem
     /**
      * @var SubLineItem[]
      */
-    protected $subLineItems;
+    protected $subLineItems = [];
 
     /** @param SubLineItem[] $subLineItems */
     public function __construct(
@@ -73,7 +73,7 @@ class LineItem
         string $createdAt,
         string $updatedAt,
         ?Product $product,
-        array $subLineItems
+        array $subLineItems = []
     ) {
         $this->uuid = $uuid;
         $this->externalIdentifier = $externalIdentifier;
@@ -139,7 +139,7 @@ class LineItem
     }
 
     /**
-     * @return array|SubLineItem[]
+     * @return SubLineItem[]
      */
     public function getSubLineItems(): array
     {

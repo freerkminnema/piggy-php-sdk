@@ -40,18 +40,18 @@ class AppliedDiscount
     protected $appliedTo;
 
     /**
-     * @var array<string, string>
+     * @var array<string, mixed>
      */
-    protected $lineItems;
+    protected $lineItems = [];
 
     /**
-     * @var array<string, string>
+     * @var array<string, mixed>
      */
-    protected $subLineItems;
+    protected $subLineItems = [];
 
     /**
-     * @param array<string, string> $lineItems
-     * @param array<string, string> $subLineItems
+     * @param array<string, mixed> $lineItems
+     * @param array<string, mixed> $subLineItems
      */
     public function __construct(
         string $uuid,
@@ -61,8 +61,8 @@ class AppliedDiscount
         string $type,
         string $value,
         string $appliedTo,
-        array $lineItems,
-        array $subLineItems
+        array $lineItems = [],
+        array $subLineItems = []
     ) {
         $this->uuid = $uuid;
         $this->externalIdentifier = $externalIdentifier;
@@ -111,7 +111,7 @@ class AppliedDiscount
     }
 
     /**
-     * @return array<string, string>
+     * @return array<string, mixed>
      */
     public function getLineItems(): array
     {
@@ -119,7 +119,7 @@ class AppliedDiscount
     }
 
     /**
-     * @return array<string, string>
+     * @return array<string, mixed>
      */
     public function getSubLineItems(): array
     {

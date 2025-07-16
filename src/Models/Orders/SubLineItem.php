@@ -7,57 +7,57 @@ use Piggy\Api\Models\Products\Product;
 class SubLineItem
 {
     /**
-     * @var string $uuid
+     * @var string
      */
     protected $uuid;
 
     /**
-     * @var string|null $externalIdentifier
+     * @var string|null
      */
     protected $externalIdentifier;
 
     /**
-     * @var string|null $name
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var int $quantity
+     * @var int
      */
     protected $quantity;
 
     /**
-     * @var string $price
+     * @var string
      */
     protected $price;
 
     /**
-     * @var int|null $discountAmount
+     * @var int|null
      */
     protected $discountAmount;
 
     /**
-     * @var int $totalAmount
+     * @var int
      */
     protected $totalAmount;
 
     /**
-     * @var string $createdAt
+     * @var string
      */
     protected $createdAt;
 
     /**
-     * @var string $updatedAt
+     * @var string
      */
     protected $updatedAt;
 
     /**
-     * @var LineItem $lineItem
+     * @var LineItem
      */
     protected $lineItem;
 
     /**
-     * @var Product|null $product
+     * @var Product|null
      */
     protected $product;
 
