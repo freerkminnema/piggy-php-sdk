@@ -10,6 +10,7 @@ use Piggy\Api\Models\Contacts\Contact;
 use Piggy\Api\Models\Shops\Shop;
 use Piggy\Api\StaticMappers\Orders\OrderMapper;
 use Piggy\Api\StaticMappers\Orders\OrdersMapper;
+use stdClass;
 
 class Order
 {
@@ -74,6 +75,11 @@ class Order
     protected $paidAt;
 
     /**
+     * @var string|null
+     */
+    protected $completedAt;
+
+    /**
      * @var string
      */
     protected $createdAt;
@@ -131,6 +137,7 @@ class Order
         int $totalDiscountAmount,
         int $totalOrderAmount,
         ?string $paidAt,
+        ?string $completedAt,
         string $createdAt,
         string $updatedAt,
         ?Contact $contact,
@@ -151,6 +158,7 @@ class Order
         $this->totalDiscountAmount = $totalDiscountAmount;
         $this->totalOrderAmount = $totalOrderAmount;
         $this->paidAt = $paidAt;
+        $this->completedAt = $completedAt;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->contact = $contact;
@@ -220,6 +228,11 @@ class Order
         return $this->paidAt;
     }
 
+    public function getCompletedAt(): ?string
+    {
+        return $this->completedAt;
+    }
+
     public function getCreatedAt(): string
     {
         return $this->createdAt;
@@ -259,7 +272,7 @@ class Order
     /**
      * @return Charge[]
      */
-    public function charges(): array
+    public function getCharges(): array
     {
         return $this->charges;
     }
@@ -325,11 +338,11 @@ class Order
      * @param string $uuid
      * @param array<string, mixed> $body
      *
-     * @return array<string, mixed>
+     * @return stdClass
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public static function process(string $uuid, array $body): array
+    public static function process(string $uuid, array $body = []): stdClass
     {
         $response = ApiClient::post(self::resourceUri."$uuid/process", $body);
 
@@ -356,11 +369,11 @@ class Order
     /**
      * @param array<string, mixed> $body
      *
-     * @return array<string, mixed>
+     * @return stdClass
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public static function calculate(array $body): array
+    public static function calculate(array $body): stdClass
     {
         $response = ApiClient::post(self::resourceUri."/calculate", $body);
 

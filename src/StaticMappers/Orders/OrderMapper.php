@@ -39,6 +39,7 @@ class OrderMapper
             (int) $data->total_discount_amount,
             (int) $data->total_order_amount,
             $data->paid_at ?? null,
+            $data->completed_at ?? null,
             $data->created_at,
             $data->updated_at,
             $contact,

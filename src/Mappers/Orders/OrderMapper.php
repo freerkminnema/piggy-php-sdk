@@ -29,6 +29,18 @@ class OrderMapper
             $lineItems = $mapper->map($data->line_items);
         }
 
+        $appliedDiscounts = [];
+        if (isset($data->applied_discounts)) {
+            $mapper = new AppliedDiscountsMapper();
+            $appliedDiscounts = $mapper->map($data->applied_discounts);
+        }
+
+        $charges = [];
+        if (isset($data->charges)) {
+            $mapper = new ChargesMapper();
+            $charges = $mapper->map($data->charges);
+        }
+
         return new Order(
             $data->uuid,
             $data->external_identifier,
@@ -42,13 +54,14 @@ class OrderMapper
             (int) $data->total_discount_amount,
             (int) $data->total_order_amount,
             $data->paid_at ?? null,
+            $data->completed_at ?? null,
             $data->created_at,
             $data->updated_at,
             $contact,
             $shop,
             $lineItems,
-            $data->applied_discounts,
-            $data->charges
+            $appliedDiscounts, // $data->applied_discounts,
+            $charges // $data->charges
         );
     }
 }

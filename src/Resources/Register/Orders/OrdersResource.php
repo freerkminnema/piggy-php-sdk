@@ -7,6 +7,7 @@ use Piggy\Api\Mappers\Orders\OrderMapper;
 use Piggy\Api\Mappers\Orders\OrdersMapper;
 use Piggy\Api\Models\Orders\Order;
 use Piggy\Api\Resources\BaseResource;
+use stdClass;
 
 class OrdersResource extends BaseResource
 {
@@ -84,11 +85,11 @@ class OrdersResource extends BaseResource
      * @param string $uuid
      * @param array<string, mixed> $body
      *
-     * @return array<string, mixed>
+     * @return stdClass
      *
      * @throws PiggyRequestException
      */
-    public function process(string $uuid, array $body): array
+    public function process(string $uuid, array $body = []): stdClass
     {
         $response = $this->client->post($this->resourceUri."$uuid/process", $body);
 
@@ -117,11 +118,11 @@ class OrdersResource extends BaseResource
     /**
      * @param array<string, mixed> $body
      *
-     * @return array<string, mixed>
+     * @return stdClass
      *
      * @throws PiggyRequestException
      */
-    public function calculate(array $body): array
+    public function calculate(array $body): stdClass
     {
         $response = $this->client->post($this->resourceUri."/calculate", $body);
 
