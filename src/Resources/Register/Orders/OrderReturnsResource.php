@@ -8,7 +8,7 @@ use Piggy\Api\Resources\BaseResource;
 use Piggy\Api\StaticMappers\Orders\OrderReturnMapper;
 use stdClass;
 
-class OrderReturns extends BaseResource
+class OrderReturnsResource extends BaseResource
 {
     /**
      * @var string

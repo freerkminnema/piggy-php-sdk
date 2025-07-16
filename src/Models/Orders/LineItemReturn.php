@@ -2,6 +2,8 @@
 
 namespace Piggy\Api\Models\Orders;
 
+use stdClass;
+
 class LineItemReturn
 {
     /**
@@ -15,17 +17,14 @@ class LineItemReturn
     protected $quantity;
 
     /**
-     * @var array<string, mixed>
+     * @var stdClass
      */
-    protected $lineItem = [];
+    protected $lineItem;
 
-    /**
-     * @param array<string, mixed> $lineItem
-     */
     public function __construct(
         string $uuid,
         int $quantity,
-        array $lineItem = []
+        stdClass $lineItem
     )
     {
         $this->uuid = $uuid;
@@ -50,9 +49,9 @@ class LineItemReturn
     }
 
     /**
-     * @return array<string, mixed>
+     * @return stdClass
      */
-    public function getLineItem(): array
+    public function getLineItem(): stdClass
     {
         return $this->lineItem;
     }

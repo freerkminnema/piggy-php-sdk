@@ -22,9 +22,9 @@ class OrderReturn
     protected $status;
 
     /**
-     * @var array<string, mixed>
+     * @var stdClass
      */
-    protected $order = [];
+    protected $order;
 
     /**
      * @var LineItemReturn[]
@@ -42,14 +42,13 @@ class OrderReturn
     const resourceUri = '/api/v3/oauth/clients/order-returns';
 
     /**
-     * @param array<string, mixed> $order
      * @param LineItemReturn[] $lineItemReturns
      * @param SubLineItemReturn[] $subLineItemReturns
      */
     public function __construct(
         string $uuid,
         string $status,
-        array $order = [],
+        stdClass $order,
         array $lineItemReturns = [],
         array $subLineItemReturns = []
     )
@@ -78,9 +77,9 @@ class OrderReturn
     }
 
     /**
-     * @return array<string, mixed>
+     * @return stdClass
      */
-    public function getOrder(): array
+    public function getOrder(): stdClass
     {
         return $this->order;
     }

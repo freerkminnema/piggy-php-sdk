@@ -26,6 +26,7 @@ use Piggy\Api\Resources\OAuth\Loyalty\Rewards\CollectableRewardsResource;
 use Piggy\Api\Resources\OAuth\Loyalty\Rewards\RewardAttributesResource;
 use Piggy\Api\Resources\OAuth\Loyalty\Rewards\RewardsResource;
 use Piggy\Api\Resources\OAuth\Loyalty\Tokens\LoyaltyTokensResource;
+use Piggy\Api\Resources\OAuth\Orders\OrderReturnsResource;
 use Piggy\Api\Resources\OAuth\Orders\OrdersResource;
 use Piggy\Api\Resources\OAuth\Perks\PerksResource;
 use Piggy\Api\Resources\OAuth\PortalSessions\PortalSessionsResource;
@@ -221,6 +222,11 @@ trait SetsOAuthResources
      */
     public $orders;
 
+    /**
+     * @var OrderReturnsResource
+     */
+    public $orderReturns;
+
     protected function setResources(BaseClient $client): void
     {
         $this->contacts = new ContactsResource($client);
@@ -259,5 +265,6 @@ trait SetsOAuthResources
         $this->products = new ProductsResource($client);
         $this->categories = new CategoriesResource($client);
         $this->orders  = new OrdersResource($client);
+        $this->orderReturns  = new OrderReturnsResource($client);
     }
 }

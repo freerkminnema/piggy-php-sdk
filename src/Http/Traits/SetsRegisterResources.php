@@ -4,8 +4,6 @@ namespace Piggy\Api\Http\Traits;
 
 use Piggy\Api\Http\BaseClient;
 use Piggy\Api\Resources\Register\Categories\CategoriesResource;
-use Piggy\Api\Resources\Register\Products\ProductsResource;
-use Piggy\Api\Resources\Register\Loyalty\Tokens\LoyaltyTokensResource;
 use Piggy\Api\Resources\Register\ContactIdentifiersResource;
 use Piggy\Api\Resources\Register\Contacts\ContactsResource;
 use Piggy\Api\Resources\Register\ContactSubscriptionsResource;
@@ -15,7 +13,11 @@ use Piggy\Api\Resources\Register\Loyalty\Program\LoyaltyProgramResource;
 use Piggy\Api\Resources\Register\Loyalty\Receptions\CreditReceptionsResource;
 use Piggy\Api\Resources\Register\Loyalty\Receptions\RewardReceptionsResource;
 use Piggy\Api\Resources\Register\Loyalty\Rewards\RewardsResource;
+use Piggy\Api\Resources\Register\Loyalty\Tokens\LoyaltyTokensResource;
+use Piggy\Api\Resources\Register\Orders\OrderReturnsResource;
+use Piggy\Api\Resources\Register\Orders\OrdersResource;
 use Piggy\Api\Resources\Register\PrepaidTransactionResource;
+use Piggy\Api\Resources\Register\Products\ProductsResource;
 use Piggy\Api\Resources\Register\Registers\RegisterResource;
 use Piggy\Api\Resources\Register\SubscriptionTypesResource;
 use Piggy\Api\Resources\Register\Vouchers\PromotionsResource;
@@ -111,6 +113,16 @@ trait SetsRegisterResources
      */
     public $categories;
 
+    /**
+     * @var OrdersResource
+     */
+    public $orders;
+
+    /**
+     * @var OrderReturnsResource
+     */
+    public $orderReturns;
+
     protected function setResources(BaseClient $client): void
     {
         $this->registers = new RegisterResource($client);
@@ -130,5 +142,7 @@ trait SetsRegisterResources
         $this->promotion = new PromotionsResource($client);
         $this->products = new ProductsResource($client);
         $this->categories = new CategoriesResource($client);
+        $this->orders = new OrdersResource($client);
+        $this->orderReturns = new OrderReturnsResource($client);
     }
 }

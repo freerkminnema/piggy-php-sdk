@@ -11,7 +11,7 @@ class OrderReturnMapper
     {
         $lineItemReturns = [];
         if (isset($data->line_item_returns)) {
-            $lineItemReturns = LineItemReturnMapper::map($data->line_item_returns);
+            $lineItemReturns = LineItemReturnsMapper::map($data->line_item_returns);
         }
 
         $subLineItemReturns = [];
