@@ -42,16 +42,6 @@ class LineItem
     protected $totalAmount;
 
     /**
-     * @var string
-     */
-    protected $createdAt;
-
-    /**
-     * @var string
-     */
-    protected $updatedAt;
-
-    /**
      * @var Product|null
      */
     protected $product;
@@ -70,8 +60,6 @@ class LineItem
         string $price,
         ?int $discountAmount,
         int $totalAmount,
-        string $createdAt,
-        string $updatedAt,
         ?Product $product,
         array $subLineItems = []
     ) {
@@ -82,8 +70,6 @@ class LineItem
         $this->price = $price;
         $this->discountAmount = $discountAmount;
         $this->totalAmount = $totalAmount;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
         $this->product = $product;
         $this->subLineItems = $subLineItems;
     }
@@ -121,16 +107,6 @@ class LineItem
     public function getTotalAmount(): int
     {
         return $this->totalAmount;
-    }
-
-    public function getCreatedAt(): string
-    {
-        return $this->createdAt;
-    }
-
-    public function getUpdatedAt(): string
-    {
-        return $this->updatedAt;
     }
 
     public function getProduct(): ?Product

@@ -15,6 +15,11 @@ class LineItemMapper
             $product = ProductMapper::map($data->product);
         }
 
+        $subLineItems = null;
+        if (isset($data->sub_line_items)) {
+            $subLineItems = SubLineItemsMapper::map($data->sub_line_items);
+        }
+
         return new LineItem(
             $data->uuid,
             $data->external_identifier,
@@ -23,10 +28,8 @@ class LineItemMapper
             $data->price,
             $data->discount_amount,
             $data->total_amount,
-            $data->created_at ?? '',
-            $data->updated_at ?? '',
             $product,
-            $data->sub_line_items
+            $subLineItems
         );
     }
 }

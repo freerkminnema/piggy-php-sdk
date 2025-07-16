@@ -28,8 +28,6 @@ class SubLineItemMapper
             $data->price,
             $data->discount_amount,
             $data->total_amount,
-            $data->created_at ?? '',
-            $data->updated_at ?? '',
             $lineItem,
             $product
         );
