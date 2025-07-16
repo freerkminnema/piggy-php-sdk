@@ -2,14 +2,14 @@
 
 namespace Piggy\Api\Mappers\Orders;
 
-use Piggy\Api\Models\Orders\LineItem;
+use Piggy\Api\Models\Orders\AppliedDiscount;
 use stdClass;
 
 class AppliedDiscountsMapper
 {
     /**
      * @param  stdClass[]  $data
-     * @return LineItem[]
+     * @return AppliedDiscount[]
      */
     public static function map(array $data): array
     {

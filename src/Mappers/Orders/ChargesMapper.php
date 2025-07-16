@@ -2,14 +2,14 @@
 
 namespace Piggy\Api\Mappers\Orders;
 
-use Piggy\Api\Models\Orders\LineItem;
+use Piggy\Api\Models\Orders\Charge;
 use stdClass;
 
 class ChargesMapper
 {
     /**
      * @param  stdClass[]  $data
-     * @return LineItem[]
+     * @return Charge[]
      */
     public static function map(array $data): array
     {
