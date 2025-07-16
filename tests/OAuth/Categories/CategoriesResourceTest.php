@@ -3,7 +3,6 @@
 namespace Piggy\Api\Tests\OAuth\Categories;
 
 use Piggy\Api\Exceptions\PiggyRequestException;
-use Piggy\Api\Models\Categories\Category;
 use Piggy\Api\Tests\OAuthTestCase;
 
 class CategoriesResourceTest extends OAuthTestCase
@@ -112,7 +111,7 @@ class CategoriesResourceTest extends OAuthTestCase
 
         $category = $this->mockedClient->categories->findOrCreate(
             '123',
-            'Category 1 name',
+            'Category 1 name'
         );
 
         $this->assertEquals('123', $category->getUuid());
