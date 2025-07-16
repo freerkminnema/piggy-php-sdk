@@ -42,7 +42,7 @@ class SubLineItem
     protected $totalAmount;
 
     /**
-     * @var LineItem
+     * @var LineItem|null
      */
     protected $lineItem;
 
@@ -59,7 +59,7 @@ class SubLineItem
         string $price,
         ?int $discountAmount,
         int $totalAmount,
-        LineItem $lineItem,
+        ?LineItem $lineItem,
         ?Product $product
     ) {
         $this->uuid = $uuid;
@@ -108,7 +108,7 @@ class SubLineItem
         return $this->totalAmount;
     }
     
-    public function getLineItem(): LineItem
+    public function getLineItem(): ?LineItem
     {
         return $this->lineItem;
     }

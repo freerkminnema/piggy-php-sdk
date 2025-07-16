@@ -25,7 +25,7 @@ class OrderMapper
 
         $lineItems = [];
         if (isset($data->line_items)) {
-            $mapper = new LineItemMapper();
+            $mapper = new LineItemsMapper();
             $lineItems = $mapper->map($data->line_items);
         }
 

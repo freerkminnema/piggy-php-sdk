@@ -84,12 +84,12 @@ class Order
     protected $updatedAt;
 
     /**
-     * @var Contact
+     * @var Contact|null
      */
     protected $contact;
 
     /**
-     * @var Shop
+     * @var Shop|null
      */
     protected $shop;
 
@@ -133,8 +133,8 @@ class Order
         ?string $paidAt,
         string $createdAt,
         string $updatedAt,
-        Contact $contact,
-        Shop $shop,
+        ?Contact $contact,
+        ?Shop $shop,
         array $lineItems = [],
         array $appliedDiscounts = [],
         array $charges = []
@@ -230,12 +230,12 @@ class Order
         return $this->updatedAt;
     }
 
-    public function getContact(): Contact
+    public function getContact(): ?Contact
     {
         return $this->contact;
     }
 
-    public function getShop(): Shop
+    public function getShop(): ?Shop
     {
         return $this->shop;
     }

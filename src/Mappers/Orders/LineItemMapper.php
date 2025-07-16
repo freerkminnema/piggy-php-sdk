@@ -16,7 +16,7 @@ class LineItemMapper
             $product = $mapper->map($data->product);
         }
 
-        $subLineItems = null;
+        $subLineItems = [];
         if (isset($data->sub_line_items)) {
             $mapper = new SubLineItemsMapper();
             $subLineItems = $mapper->map($data->sub_line_items);
