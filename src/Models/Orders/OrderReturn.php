@@ -21,7 +21,7 @@ class OrderReturn
     protected $status;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     protected $order = [];
 
@@ -40,6 +40,11 @@ class OrderReturn
      */
     const resourceUri = '/api/v3/oauth/clients/order-returns';
 
+    /**
+     * @param array<string, mixed> $order
+     * @param LineItemReturn[] $lineItemReturns
+     * @param SubLineItemReturn[] $subLineItemReturns
+     */
     public function __construct(
         string $uuid,
         string $status,
@@ -55,26 +60,41 @@ class OrderReturn
         $this->subLineItemReturns = $subLineItemReturns;
     }
 
+    /**
+     * @return string
+     */
     public function getUuid(): string
     {
         return $this->uuid;
     }
 
+    /**
+     * @return string
+     */
     public function getStatus(): string
     {
         return $this->status;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getOrder(): array
     {
         return $this->order;
     }
 
+    /**
+     * @return LineItemReturn[]
+     */
     public function getLineItemReturns(): array
     {
         return $this->lineItemReturns;
     }
 
+    /**
+     * @return SubLineItemReturn[]
+     */
     public function getSubLineItemReturns(): array
     {
         return $this->subLineItemReturns;
