@@ -1,8 +1,7 @@
 <?php
 
-namespace Piggy\Api\StaticMappers\Orders;
+namespace Piggy\Api\Mappers\Orders;
 
-use Piggy\Api\Mappers\Orders\OrderReturnMapper;
 use Piggy\Api\Models\Orders\OrderReturn;
 use stdClass;
 

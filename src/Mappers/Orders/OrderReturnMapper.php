@@ -1,6 +1,6 @@
 <?php
 
-namespace Piggy\Api\StaticMappers\Orders;
+namespace Piggy\Api\Mappers\Orders;
 
 use Piggy\Api\Models\Orders\OrderReturn;
 use stdClass;
@@ -11,7 +11,7 @@ class OrderReturnMapper
     {
         $lineItemReturns = [];
         if (isset($data->line_item_returns)) {
-            $lineItemReturns = LineItemReturnMapper::map($data->line_item_returns);
+            $lineItemReturns = LineItemReturnsMapper::map($data->line_item_returns);
         }
 
         $subLineItemReturns = [];
