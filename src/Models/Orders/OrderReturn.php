@@ -6,7 +6,8 @@ use GuzzleHttp\Exception\GuzzleException;
 use Piggy\Api\ApiClient;
 use Piggy\Api\Exceptions\MaintenanceModeException;
 use Piggy\Api\Exceptions\PiggyRequestException;
-use Piggy\Api\StaticMappers\Orders\OrderMapper;
+use Piggy\Api\StaticMappers\Orders\OrderReturnMapper;
+use stdClass;
 
 class OrderReturn
 {
@@ -103,14 +104,47 @@ class OrderReturn
     /**
      * @param array<string, mixed> $body
      *
-     * @return Order
+     * @return OrderReturn
      *
      * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
      */
-    public static function create(array $body): Order
+    public static function create(array $body): OrderReturn
     {
         $response = ApiClient::post(self::resourceUri, $body);
 
-        return OrderMapper::map($response->getData());
+        return OrderReturnMapper::map($response->getData());
+    }
+
+    /**
+     * @param string $uuid
+     * @param array<string, mixed> $body
+     *
+     * @return stdClass
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
+     */
+    public static function process(string $uuid, array $body = []): stdClass
+    {
+        $response = ApiClient::post(self::resourceUri."$uuid/process", $body);
+
+        return $response->getData();
+    }
+
+
+    /**
+     * @param array<string, mixed> $body
+     *
+     * @return array<string, mixed>
+     *
+     * @throws GuzzleException|MaintenanceModeException|PiggyRequestException
+     */
+    public static function createAndProcess(array $body): array
+    {
+        $response = ApiClient::post(self::resourceUri."/create-and-process", $body);
+
+        return [
+            'return' => OrderReturnMapper::map($response->getData()->return),
+            'result' => $response->getData()->result,
+        ];
     }
 }
