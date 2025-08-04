@@ -5,6 +5,7 @@ namespace Piggy\Api\Http\Traits;
 use Piggy\Api\Http\BaseClient;
 use Piggy\Api\Resources\OAuth\Automations\AutomationsResource;
 use Piggy\Api\Resources\OAuth\Brandkit\BrandkitResource;
+use Piggy\Api\Resources\OAuth\Categories\CategoriesResource;
 use Piggy\Api\Resources\OAuth\Contacts\ContactAttributesResource;
 use Piggy\Api\Resources\OAuth\Contacts\ContactIdentifiersResource;
 use Piggy\Api\Resources\OAuth\Contacts\ContactsResource;
@@ -25,9 +26,12 @@ use Piggy\Api\Resources\OAuth\Loyalty\Rewards\CollectableRewardsResource;
 use Piggy\Api\Resources\OAuth\Loyalty\Rewards\RewardAttributesResource;
 use Piggy\Api\Resources\OAuth\Loyalty\Rewards\RewardsResource;
 use Piggy\Api\Resources\OAuth\Loyalty\Tokens\LoyaltyTokensResource;
+use Piggy\Api\Resources\OAuth\Orders\OrderReturnsResource;
+use Piggy\Api\Resources\OAuth\Orders\OrdersResource;
 use Piggy\Api\Resources\OAuth\Perks\PerksResource;
 use Piggy\Api\Resources\OAuth\PortalSessions\PortalSessionsResource;
 use Piggy\Api\Resources\OAuth\PrepaidTransactionsResource;
+use Piggy\Api\Resources\OAuth\Products\ProductsResource;
 use Piggy\Api\Resources\OAuth\Shops\ShopsResource;
 use Piggy\Api\Resources\OAuth\SubscriptionTypesResource;
 use Piggy\Api\Resources\OAuth\Tiers\TiersResource;
@@ -203,6 +207,26 @@ trait SetsOAuthResources
      */
     public $customAttributes;
 
+    /**
+     * @var ProductsResource
+     */
+    public $products;
+
+    /**
+     * @var CategoriesResource
+     */
+    public $categories;
+
+    /**
+     * @var OrdersResource
+     */
+    public $orders;
+
+    /**
+     * @var OrderReturnsResource
+     */
+    public $orderReturns;
+
     protected function setResources(BaseClient $client): void
     {
         $this->contacts = new ContactsResource($client);
@@ -238,5 +262,9 @@ trait SetsOAuthResources
         $this->contactsPortalAuthUrl = new ContactsPortalAuthUrlResource($client);
         $this->collectableRewards = new CollectableRewardsResource($client);
         $this->customAttributes = new CustomAttributeResource($client);
+        $this->products = new ProductsResource($client);
+        $this->categories = new CategoriesResource($client);
+        $this->orders  = new OrdersResource($client);
+        $this->orderReturns  = new OrderReturnsResource($client);
     }
 }
