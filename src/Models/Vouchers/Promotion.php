@@ -6,6 +6,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Piggy\Api\ApiClient;
 use Piggy\Api\Exceptions\MaintenanceModeException;
 use Piggy\Api\Exceptions\PiggyRequestException;
+use Piggy\Api\Models\Loyalty\Media;
 use Piggy\Api\StaticMappers\Vouchers\PromotionMapper;
 use Piggy\Api\StaticMappers\Vouchers\PromotionsMapper;
 
@@ -55,6 +56,11 @@ class Promotion
      * @var mixed[]
      */
     protected $attributes;
+
+    /**
+     * @var Media|null
+     */
+    protected $media;
 
     /**
      * @var string
@@ -132,6 +138,11 @@ class Promotion
     public function getAttributes(): array
     {
         return $this->attributes;
+    }
+
+    public function getMedia(): ?Media
+    {
+        return $this->media;
     }
 
     /**
