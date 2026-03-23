@@ -28,7 +28,7 @@ class PromotionMapper
             $attributes ?? [],
             $data->type,
             $data->redemptions_per_voucher,
-            $media ?? null,
+            $media ?? null
         );
     }
 }
