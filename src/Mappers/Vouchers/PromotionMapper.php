@@ -2,6 +2,7 @@
 
 namespace Piggy\Api\Mappers\Vouchers;
 
+use Piggy\Api\Mappers\Loyalty\MediaMapper;
 use Piggy\Api\Models\Vouchers\Promotion;
 use stdClass;
 
