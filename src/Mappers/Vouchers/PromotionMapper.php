@@ -13,6 +13,10 @@ class PromotionMapper
             $attributes = get_object_vars($data->attributes);
         }
 
+        if (isset($data->media)) {
+            $media = (new MediaMapper)->map($data->media);
+        }
+
         return new Promotion(
             $data->uuid,
             $data->name,
@@ -22,7 +26,8 @@ class PromotionMapper
             $data->expiration_duration ?? null,
             $attributes ?? [],
             $data->type,
-            $data->redemptions_per_voucher
+            $data->redemptions_per_voucher,
+            $media ?? null,
         );
     }
 }
