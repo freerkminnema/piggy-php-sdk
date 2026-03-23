@@ -79,7 +79,8 @@ class Promotion
         ?int $expiration_duration = null,
         array $attributes = [],
         ?string $type = null,
-        ?int $redemptions_per_voucher = null
+        ?int $redemptions_per_voucher = null,
+        ?Media $media = null
     ) {
         $this->uuid = $uuid;
         $this->name = $name;
@@ -90,6 +91,7 @@ class Promotion
         $this->attributes = $attributes;
         $this->type = $type;
         $this->redemptions_per_voucher = $redemptions_per_voucher;
+        $this->media = $media;
     }
 
     public function getName(): string
